@@ -1,26 +1,24 @@
 // Push Button
+/* The code configures a push button to turn an LED off and on */
 
-/* The code configures an LED and a button, lighting up the LED when the button is pressed and turning it
-off otherwise. */
-
-// Assign pin numbers for the LED and the button
 #define LED_PIN 11
-#define BUTTON_PIN 2
+#define PUSH_BUTTON_PIN 2
 
-void setup() {
-  // Set LED pin as output and button pin as input
+void setup(){
+  // Initalize the LED and push button pins 
   pinMode(LED_PIN, OUTPUT);
-  pinMode(BUTTON_PIN, INPUT);
+  pinMode(PUSH_BUTTON_PIN, INPUT);
+  
 }
 
-void loop() {
-  // Check if the button is pressed
-  if (digitalRead(BUTTON_PIN) == HIGH) {
-    // Turn on the LED if the button is pressed
+void loop(){
+  // When the user presses on the push button, the LED will light up
+  if (digitalRead(PUSH_BUTTON_PIN) == HIGH){
     digitalWrite(LED_PIN, HIGH);
-  } else {
-    // Turn off the LED if the button is not pressed
+  }
+
+  else {
+  // When the user stops pressing on the push button, the LED will turn off
     digitalWrite(LED_PIN, LOW);
   }
 }
-

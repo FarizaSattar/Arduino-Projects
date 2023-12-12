@@ -1,33 +1,31 @@
 // Blink 3 LEDs
 
-/* The code defines pins for three LEDs and a button, sets LED states based on button presses, toggles LEDs' 
-states, and creates functions to control LED states. */
+/* The code controls the states of all 3 LEDs with a push button. */
 
-// Define pin numbers for LEDs and the button
-#define LED_1_PIN 12
-#define LED_2_PIN 11
-#define LED_3_PIN 10
-#define BUTTON_PIN 2
+#define RED_LED 12
+#define YELLOW_LED 11
+#define GREEN_LED 10
+#define PUSH_BUTTON_PIN 2
 
 // Define the number of LEDs in the array
-#define LED_PIN_ARRAY_SIZE 3
+#define LED_ARRAY 3
 
 // Initialize variable to track LED state
 int LEDBlinkState = 1;
 
 // Array to hold LED pins
-byte LEDPinArray[LED_PIN_ARRAY_SIZE] = {LED_1_PIN, LED_2_PIN, LED_3_PIN};
+byte LEDPinArray[LED_ARRAY] = {RED_LED, YELLOW_LED, GREEN_LED};
 
 // Function to set LED pin modes as output
 void setLEDPinModes() {
-  for (int i = 0; i < LED_PIN_ARRAY_SIZE; i++) {
+  for (int i = 0; i < LED_ARRAY; i++) {
     pinMode(LEDPinArray[i], OUTPUT);
   }
 }
 
 // Function to turn off all LEDs
 void turnOffAllLEDs() {
-  for (int i = 0; i < LED_PIN_ARRAY_SIZE; i++) {
+  for (int i = 0; i < LED_ARRAY; i++) {
     digitalWrite(LEDPinArray[i], LOW);
   }
 }
@@ -35,21 +33,21 @@ void turnOffAllLEDs() {
 // Function to toggle LED states based on LEDBlinkState variable
 void toggleLEDs() {
   if (LEDBlinkState == 1) {
-    digitalWrite(LED_1_PIN, HIGH);
-    digitalWrite(LED_2_PIN, LOW);
-    digitalWrite(LED_3_PIN, HIGH);
+    digitalWrite(RED_LED, HIGH);
+    digitalWrite(YELLOW_LED, LOW);
+    digitalWrite(GREEN_LED, HIGH);
     LEDBlinkState = 2;
   } else {
-    digitalWrite(LED_1_PIN, LOW);
-    digitalWrite(LED_2_PIN, HIGH);
-    digitalWrite(LED_3_PIN, LOW);
+    digitalWrite(RED_LED, LOW);
+    digitalWrite(YELLOW_LED, HIGH);
+    digitalWrite(GREEN_LED, LOW);
     LEDBlinkState = 1;
   }
 }
 
 void setup() {
   // Set the button pin as an input
-  pinMode(BUTTON_PIN, INPUT);
+  pinMode(PUSH_BUTTON_PIN, INPUT);
 
   // Set the LED pin modes and turn off all LEDs at the beginning
   setLEDPinModes();
@@ -58,7 +56,7 @@ void setup() {
 
 void loop() {
   // Check if the button is pressed
-  if (digitalRead(BUTTON_PIN) == LOW) {
+  if (digitalRead(PUSH_BUTTON_PIN) == LOW) {
     // Toggle the LED states when the button is pressed and add a delay
     toggleLEDs();
     delay(300);

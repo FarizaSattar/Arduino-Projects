@@ -1,69 +1,71 @@
 // Interrupts
 
-/* The code initializes and controls three LEDs (blinking LED1, toggling LED2 and LED3) based on button presses 
-while using debouncing for stable input recognition. */
+/* The code causes a red LED to blink, and also toggling LED2 and LED3) based on a
+push button with debouncing. */
 
-// Define pin numbers for LEDs and button
-#define LED_1_PIN 12
-#define LED_2_PIN 11
-#define LED_3_PIN 10
-#define BUTTON_PIN 2
+
+#define RED_LED 12
+#define YELLOW_LED 11
+#define GREEN_LED 10
+#define PUSH_BUTTON 2
 
 // Initialize variables for LED blink, button, and LED toggling
-unsigned long lastTimeLED1Blinked = millis(); // Time tracking for LED1 blinking
-unsigned long blinkDelayLED1 = 1000; // Blink interval for LED1
-byte LED1State = LOW; // State of LED1
+unsigned long lastTimeRedLEDBlinked = millis(); // Track blinking of red LED
+unsigned long blinkDelayRedLED = 1000; // Red LED blinking delay
+byte RedLEDState = LOW; // State of red LED
 
-unsigned long lastTimeButtonChanged = millis(); // Time tracking for button debounce
-unsigned long debounceDelay = 50; // Debounce duration for button press
-byte buttonState = LOW; // State of the button
+// Tracker for time for push button debounce
+unsigned long lastTimeButtonChanged = millis(); 
+unsigned long debounceDelay = 50; // Debounce delay when the push button is pressed
+byte buttonState = LOW; // Tracks the state of the button
 
-int toggleLEDState = 1; // State tracker for LED2 and LED3 toggling
+int toggleLEDState = 1; // Tracks the state of the yellow and green LED
 
 void setup() {
-  // Set pin modes for LEDs and button, initialize button state
-  pinMode(LED_1_PIN, OUTPUT);
-  pinMode(LED_2_PIN, OUTPUT);
-  pinMode(LED_3_PIN, OUTPUT);
-  pinMode(BUTTON_PIN, INPUT);
-  buttonState = digitalRead(BUTTON_PIN);
+  
+  // Initialize LEDs and push button
+  pinMode(RED_LED, OUTPUT);
+  pinMode(YELLOW_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+  pinMode(PUSH_BUTTON, INPUT);
+  buttonState = digitalRead(PUSH_BUTTON);
 }
 
-// Function to blink LED1
-void blinkLED1() {
-  if (LED1State == HIGH) {
-    LED1State = LOW;
+// Allows the red LED to blink
+void blinkRedLED() {
+  if (RedLEDState == HIGH) {
+    RedLEDState = LOW;
   } else {
-    LED1State = HIGH;
+    RedLEDState = HIGH;
   }
-  digitalWrite(LED_1_PIN, LED1State);
+  digitalWrite(RED_LED, RedLEDState);
 }
 
-// Function to toggle LED2 and LED3 states
+// Toggle the states of the yellow and green LEDs
 void toggleOtherLEDs() {
   if (toggleLEDState == 1) {
     toggleLEDState = 2;
-    digitalWrite(LED_2_PIN, LOW);
-    digitalWrite(LED_3_PIN, HIGH);
+    digitalWrite(YELLOW_LED, LOW);
+    digitalWrite(GREEN_LED, HIGH);
   } else {
     toggleLEDState = 1;
-    digitalWrite(LED_2_PIN, HIGH);
-    digitalWrite(LED_3_PIN, LOW);
+    digitalWrite(YELLOW_LED, HIGH);
+    digitalWrite(GREEN_LED, LOW);
   }
 }
 
 void loop() {
   unsigned long timeNow = millis();
 
-  // Blink LED1 at the specified interval
-  if (timeNow - lastTimeLED1Blinked > blinkDelayLED1) {
-    lastTimeLED1Blinked += blinkDelayLED1;
-    blinkLED1();
+  // Blinks red LED at a specified interval
+  if (timeNow - lastTimeRedLEDBlinked > blinkDelayRedLED) {
+    lastTimeRedLEDBlinked += blinkDelayRedLED;
+    blinkRedLED();
   }
 
-  // Toggle LED2 and LED3 based on button press with debouncing
+  // Toggles the yellow and green LED based on button press with debouncing
   if (timeNow - lastTimeButtonChanged > debounceDelay) {
-    byte newButtonState = digitalRead(BUTTON_PIN);
+    byte newButtonState = digitalRead(PUSH_BUTTON);
     if (newButtonState != buttonState) {
       lastTimeButtonChanged = timeNow;
       buttonState = newButtonState;

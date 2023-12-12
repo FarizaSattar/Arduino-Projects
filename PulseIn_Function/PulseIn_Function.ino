@@ -1,9 +1,8 @@
 // PulseIn Function
 
-/* The code utilizes ultrasonic sensor readings by triggering the sensor at regular intervals and calculating 
+/* The code reads the ultrasonic sensor by triggering the sensor and calculating 
 distance measurements based on the returned echo signal. */
 
-// Define pin numbers for ultrasonic sensor
 #define ECHO_PIN 3
 #define TRIGGER_PIN 4
 

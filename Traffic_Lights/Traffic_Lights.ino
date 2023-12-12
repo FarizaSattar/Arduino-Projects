@@ -1,41 +1,45 @@
 // Traffic Lights
 
-/* The code sequentially blinks three LEDs connected to pins 12, 11, and 10, with varying delays to create
- different blinking patterns. */
+/* The code creates a traffic light with 3 LEDs. */
 
- // Define the pin numbers for three LEDs
-#define LED_1_PIN 12
-#define LED_2_PIN 11
-#define LED_3_PIN 10
+#define RED_LED 12
+#define YELLOW_LED 11
+#define GREEN_LED 10
 
 void setup() {
-  // Set the pin modes for the three LEDs as output pins
-  pinMode(LED_1_PIN, OUTPUT);
-  pinMode(LED_2_PIN, OUTPUT);
-  pinMode(LED_3_PIN, OUTPUT);
+  // Set the 3 LED pins as outputs
+  pinMode(RED_LED, OUTPUT);
+  pinMode(YELLOW_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
 
-  // Turn off all LEDs at the beginning
-  digitalWrite(LED_1_PIN, LOW);
-  digitalWrite(LED_2_PIN, LOW);
-  digitalWrite(LED_3_PIN, LOW);
+  // Turn off all 3 LEDs at the beginning
+  digitalWrite(RED_LED, LOW);
+  digitalWrite(YELLOW_LED, LOW);
+  digitalWrite(GREEN_LED, LOW);
 }
 
 void loop() {
-  // First LED on, others off, delay for 3 seconds
-  digitalWrite(LED_1_PIN, HIGH);
-  digitalWrite(LED_2_PIN, LOW);
-  digitalWrite(LED_3_PIN, LOW);
-  delay(3000);
+  // Turn the red LED on and leave the rest off
+  digitalWrite(RED_LED, HIGH);
+  digitalWrite(YELLOW_LED, LOW);
+  digitalWrite(GREEN_LED, LOW);
 
-  // Second LED on, others off, delay for 3 seconds
-  digitalWrite(LED_1_PIN, LOW);
-  digitalWrite(LED_2_PIN, LOW);
-  digitalWrite(LED_3_PIN, HIGH);
-  delay(3000);
-
-  // Third LED on, others off, delay for 1 second
-  digitalWrite(LED_1_PIN, LOW);
-  digitalWrite(LED_2_PIN, HIGH);
-  digitalWrite(LED_3_PIN, LOW);
+  // 1 second delay
   delay(1000);
+
+  // Turn the yellow LED on and leave the rest off
+  digitalWrite(RED_LED, LOW);
+  digitalWrite(YELLOW_LED, HIGH);
+  digitalWrite(GREEN_LED, LOW);
+
+  // 2 second delay
+  delay(2000);
+
+  // Turn the green LED on and leave the rest off
+  digitalWrite(RED_LED, LOW);
+  digitalWrite(YELLOW_LED, LOW);
+  digitalWrite(GREEN_LED, HIGH);
+
+  // 3 second delay
+  delay(3000);
 }

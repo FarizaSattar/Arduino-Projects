@@ -1,28 +1,30 @@
 // EEPROM
 
-/* The code initializes a maximum brightness value stored in EEPROM, reads and updates it through Serial 
-communication, and adjusts LED brightness based on a potentiometer while limiting it to the maximum set brightness.
-*/
+/* The code initializes a maximum brightness value stored in EEPROM, updates it with
+a serial monitor, and adjusts brightness the brightness of a green LED based on a 
+potentiometer. */
 
 #include <EEPROM.h>  // Include EEPROM library to read/write from/to EEPROM memory
 
-#define LED_PIN 10  // Define the pin for the LED
-#define POTENTIOMETER_PIN A2  // Define the pin for the potentiometer
+#define GREEN_LED 10  
+#define POTENTIOMETER A2  
+#define EEPROM_ADDRESS_MAX_BRIGHTNESS 350 
+#define MAX_BRIGHTNESS_DEFAULT 255  
 
-#define EEPROM_ADDRESS_MAX_BRIGHTNESS 350  // Define the EEPROM address to store maximum brightness
-#define MAX_BRIGHTNESS_DEFAULT 255  // Define the default maximum brightness value
-
-byte maxBrightness;  // Variable to hold the maximum brightness value
+// Holds the maximum brightness value
+byte maxBrightness;  
 
 void setup() {
-  Serial.begin(115200);  // Initialize serial communication at 115200 baud rate
-  Serial.setTimeout(10);  // Set the serial read timeout to 10 milliseconds
-  pinMode(LED_PIN, OUTPUT);  // Set the LED pin as an output
 
-  // Read the maximum brightness value stored in EEPROM
+  // Initializes LED and serial monitor
+  Serial.begin(9600);  
+  Serial.setTimeout(10); 
+  pinMode(GREEN_LED, OUTPUT);  
+
+  // Reads the maximum brightness value stored in EEPROM
   maxBrightness = EEPROM.read(EEPROM_ADDRESS_MAX_BRIGHTNESS);
 
-  // If the EEPROM value is 0 (uninitialized), set it to the default maximum brightness
+  // If the EEPROM value is 0, set it to the default maximum brightness
   if (maxBrightness == 0) {
     maxBrightness = MAX_BRIGHTNESS_DEFAULT;
   }
@@ -41,7 +43,7 @@ void loop() {
   }
 
   // Read the analog value from the potentiometer and scale it to obtain LED brightness
-  byte LEDBrightness = analogRead(POTENTIOMETER_PIN) / 4;
+  byte LEDBrightness = analogRead(POTENTIOMETER) / 4;
 
   // Limit LED brightness to the maximum set brightness value
   if (LEDBrightness > maxBrightness) {
@@ -49,5 +51,5 @@ void loop() {
   }
 
   // Set the LED brightness using PWM based on the calculated value
-  analogWrite(LED_PIN, LEDBrightness);
+  analogWrite(GREEN_LED, LEDBrightness);
 }

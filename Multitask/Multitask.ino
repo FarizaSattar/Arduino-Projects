@@ -1,62 +1,61 @@
 // Multitask
 
-/* The code manages three different actions: adjusting the blink rate of an LED using Serial communication, 
-controlling LED brightness based on a potentiometer, and toggling another LED based on a button press. */
+/* The code adjusts the LED blink delay with the serial monitor, controls the LED brightness
+with a potentiometer, and toggles another LED with a push button. */
 
-// Define pin numbers for LEDs, button, and potentiometer
-#define LED_1_PIN 12
-#define LED_2_PIN 11
-#define LED_3_PIN 10
-#define BUTTON_PIN 2
+#define RED_LED 12
+#define YELLOW_LED 11
+#define GREEN_LED 10
+#define PUSH_BUTTON_PIN 2
 #define POTENTIOMETER_PIN A2
 
-// Variables to control LED1 blinking
-unsigned long previousTimeLED1Blink = millis();
-unsigned long blinkDelayLED1 = 500;
-int LED1State = LOW;
+// Control red LED blinking
+unsigned long previousTimeRedLEDBlink = millis();
+unsigned long blinkDelayRedLED = 500;
+int RedLEDState = LOW;
 
 void setup() {
-  // Begin serial communication at a baud rate of 115200 and set timeout
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.setTimeout(10);
 
-  // Set pin modes for LEDs and button
-  pinMode(LED_1_PIN, OUTPUT);
-  pinMode(LED_2_PIN, OUTPUT);
-  pinMode(LED_3_PIN, OUTPUT);
-  pinMode(BUTTON_PIN, INPUT);
+  // Initalize 3 LEDs and push button
+  pinMode(RED_LED, OUTPUT);
+  pinMode(YELLOW_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+  pinMode(PUSH_BUTTON_PIN, INPUT);
+  pinMode(POTENTIOMETER_PIN, INPUT);
 }
 
 void loop() {
-  // Adjust blink rate of LED 1 via Serial communication
+  // Adjust blink rate of red LED via Serial monitor
   if (Serial.available() > 0) {
-    int data = Serial.parseInt();
-    if ((data >= 100) && (data <= 4000)) {
-      blinkDelayLED1 = data;
+    int userBlinkDelay = Serial.parseInt();
+    if ((userBlinkDelay >= 100) && (userBlinkDelay <= 4000)) {
+      blinkDelayRedLED = userBlinkDelay;
     }
   }
 
-  // Control blinking of LED 1 based on time and blink delay
+  // User can control the blinking of the red LED 
   unsigned long timeNow = millis();
-  if (timeNow - previousTimeLED1Blink > blinkDelayLED1) {
-    if (LED1State == LOW) {
-      LED1State = HIGH;
+  if (timeNow - previousTimeRedLEDBlink > blinkDelayRedLED) {
+    if (RedLEDState == LOW) {
+      RedLEDState = HIGH;
     } else {
-      LED1State = LOW;
+      RedLEDState = LOW;
     }
-    digitalWrite(LED_1_PIN, LED1State);
-    previousTimeLED1Blink += blinkDelayLED1;
+    digitalWrite(RED_LED, RedLEDState);
+    previousTimeRedLEDBlink += blinkDelayRedLED;
   }
 
-  // Adjust LED2 brightness based on potentiometer value
+  // Adjust the brightness of the yellow LED based on the potentiometer value
   int potentiometerValue = analogRead(POTENTIOMETER_PIN);
   int intensity = potentiometerValue / 4;
-  analogWrite(LED_2_PIN, intensity);
+  analogWrite(YELLOW_LED, intensity);
   
-  // Toggle LED3 based on button press
-  if (digitalRead(BUTTON_PIN) == HIGH) {
-    digitalWrite(LED_3_PIN, HIGH);
+  // Toggle green LED on and off based on button press
+  if (digitalRead(PUSH_BUTTON_PIN) == HIGH) {
+    digitalWrite(GREEN_LED, HIGH);
   } else {
-    digitalWrite(LED_3_PIN, LOW);
+    digitalWrite(GREEN_LED, LOW);
   }
 }
