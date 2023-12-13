@@ -1,5 +1,4 @@
 // EEPROM
-
 /* The code initializes a maximum brightness value stored in EEPROM, updates it with
 a serial monitor, and adjusts brightness the brightness of a green LED based on a 
 potentiometer. */
