@@ -1,5 +1,4 @@
 // Debounce Push Button
-
 /* The code manages causes a red LED to blink at a specific interval, toggles a yellow LED 
 and green LED when a push button is pressed with debouncing. */
 
