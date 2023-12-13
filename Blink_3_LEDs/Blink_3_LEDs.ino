@@ -1,5 +1,4 @@
 // Blink 3 LEDs
-
 /* The code controls the states of all 3 LEDs with a push button. */
 
 #define RED_LED 12
