@@ -1,6 +1,5 @@
 // Interrupts
-
-/* The code causes a red LED to blink, and also toggling LED2 and LED3) based on a
+/* The code causes a red LED to blink, and also toggling a yellow and green LED based on a
 push button with debouncing. */
 
 
