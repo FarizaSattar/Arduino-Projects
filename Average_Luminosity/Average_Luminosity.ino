@@ -1,7 +1,7 @@
 // Average Luminosity
 
-/* The code takes multiple samples of luminosity from a photoresistor at regular intervals, calculating and 
-printing the average luminosity over a specified number of samples, updating every set interval. */
+/* The code takes multiple luminosity value from a photoresistor at regular intervals, calculates and 
+prints the average luminosity over a specified number of samples. It updates every set interval. */
 
 // Pin connected to the photoresistor
 #define PHOTORESISTOR_PIN A0
