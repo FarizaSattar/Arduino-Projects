@@ -1,7 +1,7 @@
 // Power LEDs
 
-/* The code reads a light sensor (photoresistor) connected to an analog pin, and based on the measured luminosity, 
-it controls two LEDs: one turning on when it's dark and the other adjusting its brightness based on the measured 
+/* The code reads a photoresistor connected to an analog pin. Based on the measured luminosity, 
+it controls two LEDs: one will turn on when it's dark and the other will adjust its brightness based on the measured 
 light intensity. */
 
 // Define pin assignments and threshold values
