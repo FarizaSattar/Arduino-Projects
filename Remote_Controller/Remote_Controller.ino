@@ -1,5 +1,4 @@
 // Remote Controller
-
 /* The code uses an IR remote to control and toggle LEDs while displaying commands and actions on an LCD screen 
 based on the received IR signals corresponding to specific buttons. */
 
