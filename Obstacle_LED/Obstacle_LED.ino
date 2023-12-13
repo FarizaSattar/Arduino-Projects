@@ -1,5 +1,4 @@
 // Obstacle LED
-
 /* The code uses ultrasonic sensors to measure distance and controls LEDs based on the measured distance with 
 smoothing to reduce noise. */
 
