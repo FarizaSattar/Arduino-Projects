@@ -1,5 +1,4 @@
 // Potentiometer
-
 /* This code configures a potentiometer to adjust an LED's brightness */
 
 #define LED_PIN 11
