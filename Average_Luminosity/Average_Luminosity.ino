@@ -11,11 +11,13 @@ prints the average luminosity over a specified number of samples. It updates eve
 
 // Array to store luminosity samples
 int luminositySamples[LUMINOSITY_SAMPLES_SIZE] = { 0 };
+
 // Counter to keep track of the current sample index
 int indexCounter = 0;
 
 // Timestamp of the last luminosity reading
 unsigned long lastTimeReadLuminosity = millis();
+
 // Delay between each luminosity sample reading
 unsigned long luminositySampleDelay = 50;
 
@@ -49,12 +51,15 @@ void loop() {
   unsigned long timeNow = millis();
   if (timeNow - lastTimeReadLuminosity > luminositySampleDelay) {
     lastTimeReadLuminosity += luminositySampleDelay;
+    
     // Check if the required number of samples is collected
     if (indexCounter == LUMINOSITY_SAMPLES_SIZE) {
       indexCounter = 0;
+      
       // Calculate and print the average luminosity
       printAverageLuminosity();
     }
+    
     // Read and store the current luminosity sample
     luminositySamples[indexCounter] = analogRead(PHOTORESISTOR_PIN);
     indexCounter++;
