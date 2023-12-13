@@ -1,5 +1,4 @@
 // Multitask
-
 /* The code adjusts the LED blink delay with the serial monitor, controls the LED brightness
 with a potentiometer, and toggles another LED with a push button. */
 
