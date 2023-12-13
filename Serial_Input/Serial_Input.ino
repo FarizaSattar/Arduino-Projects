@@ -1,7 +1,6 @@
 // Serial Input
-
-/* The code utilizes a LiquidCrystal library to display user-provided text on an LCD screen, checking and 
-formatting the text length before printing it, alternating between two lines on the display. */
+/* The code uses the LiquidCrystal library to display user-provided text on an LCD screen, check and 
+format the text length before printing it. It also alternates between two lines on the display. */
 
 #include <LiquidCrystal.h>
 
