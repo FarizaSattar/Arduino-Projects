@@ -1,5 +1,4 @@
 // Serial Monitors
-
 /* The code adjusts the blinking of an LED with the serial monitor. */
 
 #define LED_PIN 12
