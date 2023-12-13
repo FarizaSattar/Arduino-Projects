@@ -1,5 +1,4 @@
 // Traffic Lights
-
 /* The code creates a traffic light with 3 LEDs. */
 
 #define RED_LED 12
