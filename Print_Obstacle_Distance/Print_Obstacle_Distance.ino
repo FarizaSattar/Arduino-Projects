@@ -1,7 +1,7 @@
 // Print Obstacle Distance
 
-/* The code utilizes an ultrasonic sensor to measure distances and displays the measurements in centimeters on an 
-LCD screen, updating the display at a specified time interval. */
+/* The code uses an ultrasonic sensor to measure distances and displays the measurements in centimeters on an 
+LCD screen. It also updates the display at a specified time interval. */
 
 #include <LiquidCrystal.h>
 
